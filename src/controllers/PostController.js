@@ -42,7 +42,11 @@ module.exports = {
     },
 
     async destroy(req,res) {
-        await Post.findByIdAndDelete(req.params.id)
+        const deletedPost = await Post.findById(req.params.id)
+        if(deletedPost) {
+            await Post.findByIdAndDelete(req.params.id)
+            req.io.emit('delete', deletedPost)
+        }
         return res.json()
     }  
 }
