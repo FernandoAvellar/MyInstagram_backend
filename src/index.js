@@ -26,7 +26,7 @@ app.use((req,res, next) => {
 app.use(cors())
 
 //Sempre que tentarmos acessar o GET /files seremos redirecionados para a nossa pasta de fotos comprimidas
-app.use('/files', express.static(path.resolve('__dirname', '..','uploads','resized')))
+app.use('/files', express.static(path.resolve(__dirname, '..','uploads','resized')))
 
 //Lembrando que agora as nossas rotas também terão acesso ao req.io (WebSockets) e HTTP
 app.use(require('./routes'))
