@@ -16,6 +16,12 @@ module.exports = {
         const [name] = image.split('.');
         const fileName = (`${name}.jpg`)
 
+        /* Verifica se a pasta resized já está criada e a cria caso não. */
+        const resizedFolderPath = path.resolve(__dirname, '..', '..', 'uploads', 'resized')
+        if (!fs.existsSync(resizedFolderPath)){
+            fs.mkdirSync(resizedFolderPath);
+        }
+
         /* Redimensionando a imagem recebida para 500 pixels com qualidde 70% 
         e movendo para a pasta resized e depois apagando a imagem original*/
         await sharp(req.file.path)
